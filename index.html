@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Voxel Vortex</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link href="https://fonts.googleapis.com/css?family=Miriam+Libre" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+		<style>
+
+		html {
+		  position: relative;
+		  min-height: 100%;
+		  background: url(assets/bg.jpg);
+		  background-size:cover
+		}
+
+		body {
+		  /* Margin bottom by footer height */
+		  margin-bottom: 60px;
+
+		  color: #fff;
+		  background: rgba(0,0,0,0.7);
+		  height: 95vh;
+		  background-size: cover;
+		  text-transform: uppercase;
+		  margin: 0;
+		  font-family:  "Miriam Libre", sans-serif;
+		  text-align: center;
+		}
+
+		a {
+			color: #fff;
+		}
+
+		.footer {
+		  position: absolute;
+		  bottom: 0;
+		  width: 100%;
+		  /* Set the fixed height of the footer here */
+		  height: 60px;
+		  line-height: 60px; /* Vertically center the text there */
+		  background-color: #000;
+		  color: #fff;
+		}
+
+		.container {
+		  width: auto;
+		  max-width: 680px;
+		  padding: 0 15px;
+		}
+
+		#instructions {
+			text-align: left;
+			margin: 30px 0;
+		}
+
+		#title {
+			padding-top: 40px;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		canvas {
+			display: block;
+		}
+
+		.btn {
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		    width: 184px;
+		    margin: 0 10px 0 10px;
+		}
+
+		.btn:hover {
+			background: #fff;
+		    color: #000;
+		}
+
+		</style>
+	</head>
+	<body>
+
+		<div class="container">
+			<div id="title" class="mt-0">
+				<h1>Voxel Vortex</h1>
+			</div>
+			<p class="lead">An Audio Visual Experiment by <a href="http://av.scottdarby.com">Scott Darby</a></p>
+			<ul id="instructions">
+				<li>Turn on your sound and use headphones for the best experience</li>
+				<li class="hidden-md-down">Explore by clicking and dragging, the scroll wheel zooms in/out</li>
+			</ul>
+
+			<hr />
+
+			<div id="loading">
+				<p>
+					Loading<br />
+					<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+				</p>
+			</div>
+
+			<div id="loaded" class="hide">
+				<p class="hidden-md-down">Choose your quality setting:</p>
+				<a id="start" class="btn btn-lg hidden-md-down" href="javascript:void(0);">
+					<p>High</p>
+					<i class="fa fa-play" aria-hidden="true"></i>
+				</a>
+				<a id="start-medium" class="btn btn-lg hidden-md-down" href="javascript:void(0);">
+					<p>Medium</p>
+					<i class="fa fa-play" aria-hidden="true"></i>
+				</a>
+				<a id="start-mobile" class="btn btn-lg hidden-lg-up" href="javascript:void(0);">
+					<p>Play</p>
+					<i class="fa fa-play" aria-hidden="true"></i>
+				</a>
+			</div>
+
+		</div>
+
+		<footer class="footer">
+			<div class="container">
+				<a href="http://av.scottdarby.com">av.scottdarby.com</a> | <a href="mailto:info@scottdarby.com">info@scottdarby.com</a>
+			</div>
+		</footer>
+
+		<script src="dist/app.js?v=0.0.9"></script>
+	</body>
+</html>
