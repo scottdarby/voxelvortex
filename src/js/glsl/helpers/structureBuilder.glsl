@@ -18,14 +18,15 @@ vec3 structureBuilder(
     float contract,
     float contractTime,
     vec3 position,
-    inout float reachedDest
+    inout float reachedDest,
+    inout float distanceFromCenter
 ) {
 
     vOffset = offset;
 
     reachedDest = 0.3; // starting alpha
 
-    amp = pow((amp * 5.0), 2.1);
+    amp = pow(abs(amp * 5.0), 2.1);
 
     float growthSpeed = 1.0;
 
@@ -34,18 +35,14 @@ vec3 structureBuilder(
     float multiplier = 2000.0;
     float spiralFreq = 0.0001;
 
-    if (finalDest.x == 0.0) {
+    finalDest.x = (sin(id * 0.005) * multiplier) * sin(id * spiralFreq);
+    finalDest.y = (cos(id * (frequency * 0.000001)) * multiplier);
+    finalDest.z = cos(id * 0.005) * multiplier * sin(id * spiralFreq);
 
-        finalDest.x = (sin(id * 0.005) * multiplier) * sin(id * spiralFreq);
-        finalDest.y = (cos(id * (frequency * 0.000001)) * multiplier);
-        finalDest.z = cos(id * 0.005) * multiplier * sin(id * spiralFreq);
-
-        if (mod(id, 2.0) == 0.0) {
-            finalDest.x = -(sin(prevIndex * 0.005) * multiplier) * sin(prevIndex * spiralFreq);
-            finalDest.y = -(cos(prevIndex * (frequency * 0.000001)) * multiplier);
-            finalDest.z = -(cos(prevIndex * 0.005) * multiplier * sin(prevIndex * spiralFreq));
-        }
-
+    if (mod(id, 2.0) == 0.0) {
+        finalDest.x = -(sin(prevIndex * 0.005) * multiplier) * sin(prevIndex * spiralFreq);
+        finalDest.y = -(cos(prevIndex * (frequency * 0.000001)) * multiplier);
+        finalDest.z = -(cos(prevIndex * 0.005) * multiplier * sin(prevIndex * spiralFreq));
     }
 
     // add some randomness
@@ -71,10 +68,14 @@ vec3 structureBuilder(
 
     vOffset = newOffset;
 
+    distanceFromCenter = distance(newOffset, offset);
+    float distanceFromDestination = distance(finalDest, offset);
+
     // is new offset further from center than finalDest?
-    if (distance(newOffset, offset) > distance(finalDest, offset)) {
+    if (distanceFromCenter > distanceFromDestination) {
         vOffset = finalDest;
         reachedDest = 0.9;
+        distanceFromCenter = distanceFromDestination;
     }
 
     vOffset.x += sin(id) * (amp * 0.5);
@@ -138,16 +139,16 @@ vec3 structureBuilder(
     float mod4 = mod(id, 4.0);
 
     if (mod4 == 0.0) {
-        vScale *= pow(fftData.x, 2.0);
+        vScale *= pow(abs(fftData.x), 2.0);
     }
     if (mod4 == 1.0) {
-        vScale *= pow(fftData.y, 2.0);
+        vScale *= pow(abs(fftData.y), 2.0);
     }
     if (mod4 == 2.0) {
-        vScale *= pow(fftData.z, 2.0);
+        vScale *= pow(abs(fftData.z), 2.0);
     }
     if (mod4 == 3.0) {
-        vScale *= pow(fftData.w, 2.0);
+        vScale *= pow(abs(fftData.w), 2.0);
     }
 
     transformed *= (vScale * 0.7);

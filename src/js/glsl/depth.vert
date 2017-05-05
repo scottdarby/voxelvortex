@@ -15,6 +15,7 @@ uniform float contractTime;
 
 varying vec3 finalDest;
 varying vec3 vOffset;
+varying float distanceFromCenter;
 
 varying float reachedDest;
 
@@ -43,7 +44,8 @@ void main() {
       contract,
       contractTime,
       position,
-      reachedDest
+      reachedDest,
+      distanceFromCenter
   );
 
   vec4 newPos = rotationController(

@@ -31,6 +31,14 @@ export default class Floor {
             type: 'f',
             value: 2.0,
         }
+        uniforms.uTime = {
+            type: 'f',
+            value: 0.0
+        }
+        uniforms.uAmp = {
+            type: 'f',
+            value: 0.0
+        }
 
         this.floorMaterial = new THREE.ShaderMaterial({
             uniforms: uniforms,

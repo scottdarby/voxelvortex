@@ -213,7 +213,7 @@ export default class Cubes {
         if (Config.scene.shadowsOn) {
             this.mesh.frustumCulled = false;
             this.mesh.castShadow = true;
-            this.mesh.receiveShadow = true;
+            this.mesh.receiveShadow = false;
         }
 
         this.scene.add(this.mesh);

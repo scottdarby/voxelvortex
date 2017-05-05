@@ -5,6 +5,7 @@ uniform vec3 emissive;
 uniform float roughness;
 uniform float metalness;
 uniform float opacity;
+uniform float amp;
 
 #ifndef STANDARD
 	uniform float clearCoat;
@@ -14,6 +15,8 @@ uniform float opacity;
 varying vec3 vViewPosition;
 
 varying float reachedDest;
+
+varying float distanceFromCenter;
 
 #ifndef FLAT_SHADED
 
@@ -72,9 +75,13 @@ void main() {
 	// modulation
 	#include <aomap_fragment>
 
+	reflectedLight.directDiffuse.r += (amp * (distanceFromCenter * 0.000015));
+
 	vec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;
 
-	gl_FragColor = vec4( outgoingLight, reachedDest );
+	outgoingLight.r *= (distanceFromCenter/255.0) * (amp);
+
+ 	gl_FragColor = vec4( outgoingLight.rgb, reachedDest );
 
 	#include <premultiplied_alpha_fragment>
 	#include <tonemapping_fragment>

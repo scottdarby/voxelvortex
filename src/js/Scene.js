@@ -23,6 +23,8 @@ export default class Scene {
 
 		let that = this;
 
+        this.startingTime = 600.0;
+
 		this.initSound().then((player) => {
 
 			document.querySelector('#loading').classList.toggle('hide');
@@ -46,8 +48,8 @@ export default class Scene {
 	        document.querySelector('#start-mobile').addEventListener('click', function(){
 	            Config.scene.antialias = false;
 	            Config.scene.shadowsOn = false;
-	            Config.camera.animate = true;
-	            Config.cubes.count = 80000;
+	            //Config.camera.animate = true;
+	            Config.cubes.count = 50000;
 	            document.querySelector('.container').classList.toggle('hide');
 	            document.querySelector('.footer').classList.toggle('hide');
 	            that.start();
@@ -63,7 +65,7 @@ export default class Scene {
 
 		return new Promise((resolve, reject) => {
 
-			this.stereoRefDistance = 600;
+			this.stereoRefDistance = this.startingTime;
 
 			// set up effects
 	        this.mono = new Tone.Mono();
@@ -391,7 +393,7 @@ export default class Scene {
         this.windowHalfX = window.innerWidth / 2;
         this.windowHalfY = window.innerHeight / 2;
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+     }
 
     animate() {
 
@@ -404,7 +406,7 @@ export default class Scene {
 
         this.stats.begin();
 
-        this.time = (this.clock.getElapsedTime() * 10.0) + 600.0;
+        this.time = (this.clock.getElapsedTime() * 10.0) + this.startingTime;
 
         let delta = this.clock.getDelta();
 
@@ -443,8 +445,11 @@ export default class Scene {
         this.cubes.mesh.material.uniforms.frequency.value = this.time + 0.0 * 0.000005;
         this.cubes.mesh.customDepthMaterial.uniforms.frequency.value = this.time + 0.0 * 0.000005;
 
+        this.floor.mesh.material.uniforms.uTime.value = this.time * 0.0002;
+
         this.cubes.mesh.material.uniforms.amp.value = this.meter.value;
         this.cubes.mesh.customDepthMaterial.uniforms.amp.value = this.meter.value;
+        this.floor.mesh.material.uniforms.uAmp.value = this.meter.value;
 
         //this.renderer.clear();
 

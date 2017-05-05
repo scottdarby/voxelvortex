@@ -15,6 +15,7 @@ uniform float contractTime;
 
 varying vec3 finalDest;
 varying vec3 vOffset;
+varying float distanceFromCenter;
 
 varying vec3 vViewPosition;
 
@@ -80,7 +81,8 @@ void main() {
 		contract,
         contractTime,
 		position,
-		reachedDest
+		reachedDest,
+		distanceFromCenter
 	);
 
 	#include <displacementmap_vertex>
