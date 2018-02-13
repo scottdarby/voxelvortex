@@ -7,11 +7,11 @@
 https://scottdarby.github.io/voxelvortex
 
 ## License
-Copyright (c) Scott Darby 2017
+Copyright (c) Scott Darby 2018
 
 Contact: info@scottdarby.com
 
-Music: Copyright (c) Scott Darby 2017
+Music: Copyright (c) Scott Darby 2018
 
 ## Installation
 
